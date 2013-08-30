@@ -222,10 +222,10 @@ Next, we would like to get notified of activity changes as they occur. To do tha
 - (void)activityUpdated
 {
     // Log changes from walking to running
-    if ([_connectedSensor.currentActivity isEqualToString: LBSensorActivityWalk]) {
+    if ([_connectedSensor.currentActivity isEqualToString: LBSensorCurrentActivityWalk]) {
         NSLog(@"now walking");
     }
-    if ([_connectedSensor.currentActivity isEqualToString: LBSensorActivityRun]) {
+    if ([_connectedSensor.currentActivity isEqualToString: LBSensorCurrentActivityRun]) {
         NSLog(@"now running");
     }
 }

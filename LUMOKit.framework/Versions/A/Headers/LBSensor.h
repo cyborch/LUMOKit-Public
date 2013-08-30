@@ -11,6 +11,20 @@
 @class LBSensor;
 @class LBSensorVersion;
 
+// Current sensor activity
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityWalk;      // Walking
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityRun;       // Running
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityStand;     // Standing (good or bad)
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivitySitGood;   // Sitting straght
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivitySitBad;    // Sitting bad
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityCar;       // In car
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityLieLeft;   // Lieing on left side
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityLieRight;  // Lieing on right side
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityLieFront;  // Lieing on front
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityLieBack;   // Lieing on back
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityInactive;  // Sensor thinks is isn't being worn
+FOUNDATION_EXPORT NSString* const LBSensorCurrentActivityNotWorn;   // Sensor knows it isn't being worn - it is charging
+
 // Sensor states
 typedef NS_ENUM(NSInteger, LBSensorState) {
     LBSensorStateClosed,    // There is no open connection to the sensor
@@ -39,35 +53,6 @@ typedef NS_ENUM(NSInteger, LBSensorBuzzStrength) {
     LBSensorBuzzStrengthMedium,
     LBSensorBuzzStrengthHigh,
 };
-
-// Current sensor activity
-FOUNDATION_EXPORT NSString* const LBSensorActivityInactive;             	// Sensor thinks it is not on a person
-FOUNDATION_EXPORT NSString* const LBSensorActivityCar;                  	// Driving car
-FOUNDATION_EXPORT NSString* const LBSensorActivityLieBack;                  // Lie back
-FOUNDATION_EXPORT NSString* const LBSensorActivityLieFront;                 // Lie front
-FOUNDATION_EXPORT NSString* const LBSensorActivityLieLeft;                  // Lie left
-FOUNDATION_EXPORT NSString* const LBSensorActivityLieRight;                 // Lie right
-FOUNDATION_EXPORT NSString* const LBSensorActivityNotWorn;                  // Sensor is plugged into USB
-FOUNDATION_EXPORT NSString* const LBSensorActivityRun;                      // Run
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitBadForward;            // Sit bad forward
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitBadLeft;               // Sit bad left
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitBadRight;              // Sit bad right
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitBadBackward;           // Sit bad backward
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitGood;                  // Sit good
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandBadForward;          // Stand bad forward
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandBadLeft;             // Stand bad left
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandBadRight;            // Stand bad right
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandBadBackward;         // Stand bad backward
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandGood;                // Stand good
-FOUNDATION_EXPORT NSString* const LBSensorActivityWalk;                     // Walk
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandQuiteBadForward;     // Stand quite bad forward
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandReallyBadForward;    // Stand really bad forward
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandQuiteBadBackward;    // Stand quite bad slouch
-FOUNDATION_EXPORT NSString* const LBSensorActivityStandReallyBadBackward;   // Stand really bad slouch
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitQuiteBadForward;       // Sit quite bad forward
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitReallyBadForward;      // Sit really bad forward
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitQuiteBadBackward;      // Sit quite bad slouch
-FOUNDATION_EXPORT NSString* const LBSensorActivitySitReallyBadBackward;     // Sit really bad slouch
 
 // Block which is invoked when a connection is completed
 typedef void (^LBSensorConnectResultBlock)(LBSensorConnectionResult result);

@@ -12,6 +12,36 @@
 
 FOUNDATION_EXPORT NSString* const kCFErrorDomainLBActivityStorage;
 
+// Historical sensor activity
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityInactive;              	 // Sensor thinks it is not on a person
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityCar;                  	 // Driving car
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityLieBack;                  // Lie back
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityLieFront;                 // Lie front
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityLieLeft;                  // Lie left
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityLieRight;                 // Lie right
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityNotWorn;                  // Sensor is plugged into USB
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityRun;                      // Run
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitBadForward;            // Sit bad forward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitBadLeft;               // Sit bad left
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitBadRight;              // Sit bad right
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitBadBackward;           // Sit bad backward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitGood;                  // Sit good
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandBadForward;          // Stand bad forward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandBadLeft;             // Stand bad left
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandBadRight;            // Stand bad right
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandBadBackward;         // Stand bad backward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandGood;                // Stand good
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityWalk;                     // Walk
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandQuiteBadForward;     // Stand quite bad forward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandReallyBadForward;    // Stand really bad forward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandQuiteBadBackward;    // Stand quite bad slouch
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivityStandReallyBadBackward;   // Stand really bad slouch
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitQuiteBadForward;       // Sit quite bad forward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitReallyBadForward;      // Sit really bad forward
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitQuiteBadBackward;      // Sit quite bad slouch
+FOUNDATION_EXPORT NSString* const LBActivityStorageActivitySitReallyBadBackward;     // Sit really bad slouch
+
+
 /*
  Mask of activities which should be aggregated.
  */
