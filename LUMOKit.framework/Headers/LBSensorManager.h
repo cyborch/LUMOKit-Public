@@ -87,13 +87,13 @@ typedef void (^LBSensorManagerCompletionBlock)(LBSensorManagerRequestResult resu
 - (void)stopScan;
 
 /*
- Accessing stored sensor passwords
+ Accessing stored owner passwords
  
  Storing last known good passwords allows the sensor manager to automatically
  connect to a sensor when it is discovered if a sensorAutoconnectBlock is specified.
  */
-- (NSString*)lastKnownGoodPasswordForSensor:(LBSensor*)sensor;
-- (void)storeKnownGoodPassword:(NSString*)password forSensor:(LBSensor*)sensor;
+- (NSString*)lastKnownGoodPasswordForOwner:(NSString*)owner;
+- (void)storeKnownGoodPassword:(NSString*)password forOwner:(NSString*)owner;
 
 // Request a password reset from cloud service
 - (void)resetPasswordForSensor:(LBSensor*)sensor withCompletionBlock:(LBSensorManagerCompletionBlock)block;

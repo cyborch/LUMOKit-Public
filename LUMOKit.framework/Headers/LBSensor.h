@@ -98,7 +98,10 @@ typedef void(^LBSensorActivityImportProgressBlock)(int remaining);
 @property (nonatomic,readonly) NSNumber *currentRunSteps;
 @property (nonatomic,readonly) NSNumber *currentStandups;
 @property (nonatomic,readonly) NSNumber *currentDistance;
+@property (nonatomic,readonly) NSNumber *currentRunDistance;
 @property (nonatomic,readonly) NSNumber *currentCalories;
+@property (nonatomic,readonly) NSNumber *currentRunCalories;
+@property (nonatomic,readonly) NSNumber *currentWalkCalories;
 @property (nonatomic,readonly) NSNumber *currentSitTime;
 @property (nonatomic,readonly) NSNumber *currentSlouchAngle;    // Forward/backward angle
 @property (nonatomic,readonly) NSNumber *currentTiltAngle;      // Left/right angle

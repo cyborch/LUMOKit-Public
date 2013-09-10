@@ -104,7 +104,7 @@
                              NSLog(@"successful connect");
                              _connectedSensor = sensor;
                              [_sensorManager storeKnownGoodPassword: <#owner password#>
-                                                          forSensor: sensor];
+                                                           forOwner: <#owner email#>];
                              // Start observing activity changes - see below
                              [weak observeActivities];
                              
