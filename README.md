@@ -1,36 +1,40 @@
 LUMOKit-Public
 ==============
 
-![LUMOback Logo](http://www.lumoback.com/wp-content/uploads/2013/05/logo_color-150x100.png)
+![Lumo Body Tech Logo](http://www.lumobodytech.com/wp-content/themes/Lumo-Child/images/lumo-logo-thin-green.png)
 
 ## Overview
 
-**LUMOKit** is an Objective-C framework for iOS. This framework lets you develop iOS applications that communicate with a LUMOback sensor in real time. The sensor communicates the user's current posture and activity once a second.
+**LUMOKit** is an Objective-C framework for iOS. This framework lets you develop iOS applications that communicate with a Lumo sensor in real time. The sensor communicates the user's current posture and activity once a second.
 
 This document demonstrates the procedures to get started with LUMOKit and to create a basic iOS application using the framework.
 
 ### Compatible Devices for App and Setup
 The SDK currently supports the following devices and operating systems: 
 
-- iPhone 4s+ with iOS 6.1+
-- iPad 3 with iOS 6.1+
-- iPad Mini with iOS 6.1+
-- iPod Touch 5th Generation with iOS 6.1+
+- iPhone 4s+ with iOS 6.0+
+- iPad 3 with iOS 6.0+
+- iPad Mini with iOS 6.0+
+- iPod Touch 5th Generation with iOS 6.0+
 
-### The LUMOback Sensor
-You will need the [LUMOback](http://www.lumoback.com) Sensor. 
+### The Lumo Sensor
+You will need the [LumoBack](http://www.lumobodytech.com/lumoback/) or the [LumoLift](http://www.lumobodytech.com/) Sensor. 
 
-![LUMOback Image](http://cdn.shopify.com/s/files/1/0214/4274/products/shopify_fold_640_large.jpg?768)
+![LumoBack Image](http://cdn.shopify.com/s/files/1/0214/4274/products/shopify_fold_640_large.jpg?768)
 
-#### What is LUMOback?
+![LumoLift Image](http://lumo.wpengine.netdna-cdn.com/wp-content/themes/Lumo-Child/images/sensor-multiple-vh.jpg)
+
+#### What is Lumo a sensor?
 **The Smart Posture & Movement Sensor.**  
-The LUMOback<sup>TM</sup> sensor gently vibrates when you slouch and the app tracks daily movements to inspire proper posture and increased mobility.
+The LumoBack<sup>TM</sup> and LumoLift<sup>TM</sup> sensors gently vibrates when you slouch and the app tracks daily movements to inspire proper posture and increased mobility.
 
 #### Need a Sensor?  
-[Purchase one here](http://www.lumobackstore.com/products/lumoback-posture-sensor). 
+[Purchase LumoBack here](http://www.lumobackstore.com/products/lumoback-posture-sensor).
+
+[Purchase LumoLift here](https://liftstore.lumobodytech.com)
 
 ## LUMOKit Tutorial
-This tutorial provides an overview of the basic functionalities of the SDK and the steps to build a simple iOS application integrated with LUMOKit framework. Please refer to the repository on Github for the complete source code of the tutorials and the framework.
+This tutorial provides an overview of the basic functionalities of the SDK and the steps to build a simple iOS application integrated with LUMOKit framework. Please refer to the repository on Github for the framework and the complete source code of the tutorials.
 
 #### Prerequisites
 
@@ -75,25 +79,27 @@ In order to start using the framework, add this line of code to your source file
 
 2) __REGISTERING AN APPLICATION ID, ACCESSING SENSOR DATA__
 
-To register your application with us and request an Application ID, please contact  **support@lumoback.com**. 
+To register your application with us and request an Application ID, please contact  **support@lumobodytech.com**. 
 
 Once you have a registered Application ID, you can pass it to any of the manager classes in the framework and use those manager to discover nearby sensors, connect to a sensor and access activity data.
 
 ```objective-c
-LBSensorManager *sensorManager = [[LBSensorManager alloc] initWithAppId: @"<YOUR APP ID HERE>"];
-LBActivityStorageManager *storageManager = [[LBActivityStorageManager alloc] initWithOwner: @"<SENSOR OWNER EMAIL ADDRESS HERE>"
-                                                                                     appId: @"<YOUR APP ID HERE>"];
+LKSensorManager *sensorManager = [[LKSensorManager alloc] initWithAppId: @"<YOUR APP ID HERE>"
+                                                                version: @"<YOUR APP VERSION HERE>"];
+LKActivityStorageManager *storageManager = [[LKActivityStorageManager alloc] initWithOwner: @"<SENSOR OWNER EMAIL ADDRESS HERE>"
+                                                                                     appId: @"<YOUR APP ID HERE>"
+                                                                                   version: @"<YOUR APP VERSION HERE>"];
 ```
 
 3) __DISCOVERING AND CONNECTING TO A SENSOR__
 
-In order to get an updated list of sensors observe the sensors array on a `LBSensorManager` instance. Firstly, we want to declare a few instance variables:
+In order to get an updated list of sensors observe the sensors array on a `LKSensorManager` instance. Firstly, we want to declare a few instance variables:
 
 ```objective-c
 @interface SampleClass : NSObject {
-    LBSensorManager *_sensorManager;             // Discovery and management of sensors
-    LBSensor *_connectedSensor;                  // The currently connected sensor
-    LBActivityStorageManager *_storageManager;   // Optional: Accessing historical activity storage
+    LKSensorManager *_sensorManager;             // Discovery and management of sensors
+    LKSensor *_connectedSensor;                  // The currently connected sensor
+    LKActivityStorageManager *_storageManager;   // Optional: Accessing historical activity storage
 }
 @end
 ```
@@ -105,8 +111,8 @@ Next, we want start the implementation of our class with a method to scan for ne
 // Start scanning for sensors and observe changes in the sensors array
 - (void)startScanningForSensors
 {
-    _sensorManager = [[LBSensorManager alloc] initWithAppId: @"<YOUR APP ID HERE>"];
-    _storageManager = [[LBActivityStorageManager alloc] initWithOwner: @"<SENSOR OWNER EMAIL ADDRESS HERE>"
+    _sensorManager = [[LKSensorManager alloc] initWithAppId: @"<YOUR APP ID HERE>"];
+    _storageManager = [[LKActivityStorageManager alloc] initWithOwner: @"<SENSOR OWNER EMAIL ADDRESS HERE>"
                                                                 appId: @"<YOUR APP ID HERE>"];
     [_sensorManager addObserver: self
                      forKeyPath: @"sensors"
@@ -143,15 +149,15 @@ Now, try to connect to the closest sensor if a connection attempt hasn't already
         if (_sensorManager.sensors.count) {
             connecting = YES;
             __weak SampleClass *weak = self;
-            LBSensor *sensor = _sensorManager.sensors[0];
+            LKSensor *sensor = _sensorManager.sensors[0];
             [sensor connectWithOwner: @"<SENSOR OWNER EMAIL ADDRESS HERE>"
                             password: @"<PASSWORD HERE>"
-                     completionBlock: ^(LBSensorConnectionResult result) {
-                         if (result == LBSensorConnectOwned) {
+                     completionBlock: ^(LKSensorConnectionResult result) {
+                         if (result == LKSensorConnectOwned) {
                              _connectedSensor = sensor;
                              // Start observing activity changes - see below
                              [weak observeActivities];
-                         } else if (result == LBSensorConnectNew) {
+                         } else if (result == LKSensorConnectNew) {
                              _connectedSensor = sensor;
                              // Register as an owner of a sensor here - see below
                              [weak registerOwner];
@@ -175,21 +181,21 @@ To "own" a sensor means that a sensor is associated with one and only one accoun
 {
     [_sensorManager authorizeOwnSensor: _connectedSensor
                           withPassword: @"<PASSWORD HERE>"
-                       completionBlock: ^(LBSensorManagerOwnResult result) {
+                       completionBlock: ^(LKSensorManagerOwnResult result) {
                            switch (result) {
-                               case LBSensorManagerOwnOK:
+                               case LKSensorManagerOwnOK:
                                    NSLog(@"own authorized");
                                    break;
-                               case LBSensorManagerOwnNetworkUnavailable:
+                               case LKSensorManagerOwnNetworkUnavailable:
                                    NSLog(@"network error - please try again later");
                                    break;
-                               case LBSensorManagerOwnInvalidPassword:
+                               case LKSensorManagerOwnInvalidPassword:
                                    NSLog(@"invalid password");
                                    break;
-                               case LBSensorManagerOwnInvalidOwnerName:
+                               case LKSensorManagerOwnInvalidOwnerName:
                                    NSLog(@"invalid owner name");
                                    break;
-                               case LBSensorManagerOwnOwnedByOther:
+                               case LKSensorManagerOwnOwnedByOther:
                                    NSLog(@"somebody else already owns this sensor");
                                    break;
                            }
@@ -222,10 +228,10 @@ Next, we would like to get notified of activity changes as they occur. To do tha
 - (void)activityUpdated
 {
     // Log changes from walking to running
-    if ([_connectedSensor.currentActivity isEqualToString: LBSensorCurrentActivityWalk]) {
+    if ([_connectedSensor.currentActivity isEqualToString: LKSensorCurrentActivityWalk]) {
         NSLog(@"now walking");
     }
-    if ([_connectedSensor.currentActivity isEqualToString: LBSensorCurrentActivityRun]) {
+    if ([_connectedSensor.currentActivity isEqualToString: LKSensorCurrentActivityRun]) {
         NSLog(@"now running");
     }
 }
@@ -256,8 +262,8 @@ Optionally, we can access information about how much time we spent on any given 
     [_storageManager.activityStorage aggregatedActivitiesForYear: components.year
                                                            month: components.month
                                                              day: components.day
-                                                            mask: LBActivityStorageActivityMaskWalk
-                                                      usingBlock: ^(LBPeriodActivities *activities, NSError *error) {
+                                                            mask: LKActivityStorageActivityMaskWalk
+                                                      usingBlock: ^(LKPeriodActivities *activities, NSError *error) {
                                                           float walkTime = activities.walk * activities.duration;
                                                           NSLog(@"walked for %f hours today", walkTime / 3600.0f);
                                                       }];
@@ -266,5 +272,5 @@ Optionally, we can access information about how much time we spent on any given 
 
 7) __CAVEATS__
 
-The LUMOKit uses the LB* and ZO* class prefixes internally. These prefixes should be reserved for LUMOKit use to avoid class name collisions.
+The LUMOKit uses the LK* and ZO* class prefixes internally. These prefixes should be reserved for LUMOKit use to avoid class name collisions.
 

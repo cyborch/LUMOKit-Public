@@ -11,9 +11,9 @@
 #import <LUMOKit/LUMOKit.h>
 
 @interface AppDelegate () {
-    LBSensorManager *_sensorManager;             // Discovery and management of sensors
-    LBSensor *_connectedSensor;                  // The currently connected sensor
-    LBActivityStorageManager *_storageManager;   // Optional: Accessing historical activity storage
+    LKSensorManager *_sensorManager;             // Discovery and management of sensors
+    LKSensor *_connectedSensor;                  // The currently connected sensor
+    LKActivityStorageManager *_storageManager;   // Optional: Accessing historical activity storage
 }
 @end
 
@@ -34,9 +34,11 @@
 // Start scanning for sensors and observe changes in the sensors array
 - (void)startScanningForSensors
 {
-    _sensorManager = [[LBSensorManager alloc] initWithAppId: <#app id#>];
-    _storageManager = [[LBActivityStorageManager alloc] initWithOwner: <#owner email#>
-                                                                appId: <#app id#>];
+    _sensorManager = [[LKSensorManager alloc] initWithAppId: <#app id#>
+                                                    version: <#app version#>];
+    _storageManager = [[LKActivityStorageManager alloc] initWithOwner: <#owner email#>
+                                                                appId: <#app id#>
+                                                              version: <#app version#>];
     [_sensorManager addObserver: self
                      forKeyPath: @"sensors"
                         options: NSKeyValueObservingOptionNew
@@ -76,10 +78,10 @@
 - (void)activityUpdated
 {
     // Log changes from walking to running
-    if ([_connectedSensor.currentActivity isEqualToString: LBSensorCurrentActivityWalk]) {
+    if ([_connectedSensor.currentActivity isEqualToString: LKSensorCurrentActivityWalk]) {
         NSLog(@"now walking");
     }
-    if ([_connectedSensor.currentActivity isEqualToString: LBSensorCurrentActivityRun]) {
+    if ([_connectedSensor.currentActivity isEqualToString: LKSensorCurrentActivityRun]) {
         NSLog(@"now running");
     }
 }
@@ -96,11 +98,11 @@
         if (_sensorManager.sensors.count) {
             connecting = YES;
             __weak AppDelegate *weak = self;
-            LBSensor *sensor = _sensorManager.sensors[0];
+            LKSensor *sensor = _sensorManager.sensors[0];
             [sensor connectWithOwner: <#owner email#>
                             password: <#owner password#>
-                     completionBlock: ^(LBSensorConnectionResult result) {
-                         if (result == LBSensorConnectOwned) {
+                     completionBlock: ^(LKSensorConnectionResult result) {
+                         if (result == LKSensorConnectOwned) {
                              NSLog(@"successful connect");
                              _connectedSensor = sensor;
                              [_sensorManager storeKnownGoodPassword: <#owner password#>
@@ -109,7 +111,7 @@
                              [weak observeActivities];
                              
                              [_sensorManager stopScan];
-                         } else if (result == LBSensorConnectNew) {
+                         } else if (result == LKSensorConnectNew) {
                              NSLog(@"new connect");
                              _connectedSensor = sensor;
                              // Register as an owner of a sensor here - see below
@@ -134,8 +136,8 @@
     [_storageManager.activityStorage aggregatedActivitiesForYear: components.year
                                                            month: components.month
                                                              day: components.day
-                                                            mask: LBActivityStorageActivityMaskWalk
-                                                      usingBlock: ^(LBPeriodActivities *activities, NSError *error) {
+                                                            mask: LKActivityStorageActivityMaskWalk
+                                                      usingBlock: ^(LKPeriodActivities *activities, NSError *error) {
                                                           float walkTime = activities.walk * activities.duration;
                                                           NSLog(@"walked for %f hours today", walkTime / 3600.0f);
                                                       }];
@@ -145,21 +147,21 @@
 {
     [_sensorManager authorizeOwnSensor: _connectedSensor
                           withPassword: <#owner password#>
-                       completionBlock: ^(LBSensorManagerOwnResult result) {
+                       completionBlock: ^(LKSensorManagerOwnResult result) {
                            switch (result) {
-                               case LBSensorManagerOwnOK:
+                               case LKSensorManagerOwnOK:
                                    NSLog(@"own authorized");
                                    break;
-                               case LBSensorManagerOwnNetworkUnavailable:
+                               case LKSensorManagerOwnNetworkUnavailable:
                                    NSLog(@"network error - please try again later");
                                    break;
-                               case LBSensorManagerOwnInvalidPassword:
+                               case LKSensorManagerOwnInvalidPassword:
                                    NSLog(@"invalid password");
                                    break;
-                               case LBSensorManagerOwnInvalidOwnerName:
+                               case LKSensorManagerOwnInvalidOwnerName:
                                    NSLog(@"invalid owner name");
                                    break;
-                               case LBSensorManagerOwnOwnedByOther:
+                               case LKSensorManagerOwnOwnedByOther:
                                    NSLog(@"somebody else already owns this sensor");
                                    break;
                            }

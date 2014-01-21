@@ -1,5 +1,5 @@
 //
-//  LBPeriodActivities.h
+//  LKPeriodActivities.h
 //  LumoKit
 //
 //  Created by Anders Borch on 8/8/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LBPeriodActivities : NSObject
+@interface LKPeriodActivities : NSObject
 
 @property (nonatomic, readonly) NSString *sensorId;         // ID of sensor which recorded the activities for the period
 @property (nonatomic, readonly) NSTimeInterval time;        // GMT timestamp for period start time
@@ -35,11 +35,16 @@
 @property (nonatomic, readonly) double car;
 @property (nonatomic, readonly) double notWorn;
 @property (nonatomic, readonly) double inactive;
+@property (nonatomic, readonly) double subjectiveGood;
 
 @property (nonatomic, readonly) int walkSteps;              // Number of steps taken
 @property (nonatomic, readonly) int runSteps;               // Number of running steps taken
 @property (nonatomic, readonly) int standups;               // Number of stand ups performed
 @property (nonatomic, readonly) int calories;               // Number of calories burned
 @property (nonatomic, readonly) int distance;               // Distance in meters walked or ran
+
+@property (nonatomic, readonly) int runCalories;            // Number of calories burned while running
+@property (nonatomic, readonly) int walkCalories;           // Number of calories burned while walking
+@property (nonatomic, readonly) int runDistance;            // Distance in meters ran
 
 @end

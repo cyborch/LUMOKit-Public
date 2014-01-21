@@ -1,5 +1,5 @@
 //
-//  LBSensorVersion.h
+//  LKSensorVersion.h
 //  LumoKit
 //
 //  Created by Anders Borch on 8/16/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LBSensorVersion : NSObject
+@interface LKSensorVersion : NSObject
 
 @property (nonatomic,readonly) NSUInteger major;
 @property (nonatomic,readonly) NSUInteger minor;
